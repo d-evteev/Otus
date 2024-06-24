@@ -1,0 +1,2 @@
+[web]
+nginx ansible_host=192.168.3.22 ansible_port=22 ansible_user=evteev 

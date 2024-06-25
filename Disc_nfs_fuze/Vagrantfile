@@ -1,0 +1,24 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+  end
+
+  config.vm.define "nfss" do |nfss|
+    nfss.vm.network "private_network", ip: "192.168.3.10"
+    nfss.vm.hostname = "nfs-server"
+    nfss.vm.provision "shell", path: "nfs_server.sh"
+  end
+
+  config.vm.define "nfsc" do |nfsc|
+    nfsc.vm.network "private_network", ip: "192.168.3.11"
+    nfsc.vm.hostname = "nfs-client"
+    nfsc.vm.provision "shell", path: "nfs_client.sh"
+  end
+
+end
